@@ -25,7 +25,7 @@ from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import (
     ConsoleSpanExporter,
-    SimpleExportSpanProcessor,
+    SimpleSpanProcessor,
 )
 
 # The preferred tracer implementation must be set, as the opentelemetry-api
@@ -36,7 +36,7 @@ trace.set_tracer_provider(TracerProvider())
 opentelemetry.instrumentation.requests.RequestsInstrumentor().instrument()
 
 trace.get_tracer_provider().add_span_processor(
-    SimpleExportSpanProcessor(ConsoleSpanExporter())
+    SimpleSpanProcessor(ConsoleSpanExporter())
 )
 
 app = flask.Flask(__name__)
